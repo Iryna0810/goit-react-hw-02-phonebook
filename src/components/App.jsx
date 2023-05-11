@@ -40,11 +40,7 @@ export class App extends Component {
   handleChangeFilter = (event) => {
     this.setState({filter: event.currentTarget.value})
   };
-
-  // formSubmitHanler = data => {
-  // console.log(data)
-  // }
-  
+ 
   render() {
   const visibleContacts = this.getVisibleContacts();
   
@@ -81,9 +77,7 @@ export class App extends Component {
       />
       <Contacts 
             contactsList={visibleContacts}
-        />
-        
-        
+        />        
     </div>
     );
   }

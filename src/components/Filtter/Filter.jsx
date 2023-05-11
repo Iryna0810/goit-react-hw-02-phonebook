@@ -11,3 +11,8 @@ export const Filter = ({values, onChange}) =>
     </StyledInput>
 </label>
 )
+
+Filter.propTypes = {
+    values: PropTypes.string,
+    onChange: PropTypes.func,
+}

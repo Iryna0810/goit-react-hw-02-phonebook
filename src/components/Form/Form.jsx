@@ -1,6 +1,8 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { ActionsWrapper, Button, StyledInput } from "components/styled";
 const { Component } = require("react");
-// import { nanoid } from 'nanoid'
+
 
 
 export class Form extends Component {
@@ -30,8 +32,6 @@ export class Form extends Component {
         this.setState({name: '',
     number: '',})
     }
-
-
 
     render() {
       return <ActionsWrapper action="" onSubmit={this.handleSubmit}>
@@ -64,3 +64,5 @@ export class Form extends Component {
     }
 
 }
+
+Form.propTypes = { onSubmit: PropTypes.func.isRequired};

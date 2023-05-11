@@ -10,10 +10,7 @@ export const Contacts = ({ contactsList }) =>
         <p>{contact.name}</p>
         <p>{contact.number}</p>
     </li>))}
-</List>
-//  <li
-//         className=''
-//         id={contact.id}>
-//             <p>{contact.name}</p>
-//             <p>{contact.number}</p>
-//         </li>
+    </List>
+
+
+Contacts.propTypes = { contactsList: PropTypes.array };
