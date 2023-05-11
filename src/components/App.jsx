@@ -1,7 +1,10 @@
 import { Component } from "react"
 import { nanoid } from 'nanoid'
-import { StyledComponent } from "styled-components";
 import { Form } from "./Form/Form";
+import { Title } from './Contacts/Title';
+import { TitleBook } from "./Form/Title_book";
+import { Contacts } from "./Contacts/Contacts";
+import { Filter } from "./Filtter/Filter";
 
 export class App extends Component {
   state = {
@@ -12,33 +15,75 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    // name: '',
-    // number: '',
   };
 
-  formSubmitHanler = data => {
-  console.log(data)
-  }
+  addContact = ({ name, number }) => {
+    const ContactItem = {
+      id: nanoid(),
+      name,
+      number,
+    };
+
+    this.setState(prevState => ({
+      contacts: [ContactItem, ...prevState.contacts],
+    })
+    )
+  };
+  
+  getVisibleContacts = () => {
+    return this.state.contacts
+      .filter(contact => contact.name.toLowerCase()
+        .includes(this.state.filter.toLowerCase())
+      )
+  };
+  
+  handleChangeFilter = (event) => {
+    this.setState({filter: event.currentTarget.value})
+  };
+
+  // formSubmitHanler = data => {
+  // console.log(data)
+  // }
   
   render() {
-
+  const visibleContacts = this.getVisibleContacts();
   
   return (
     <div
       style={{
-        height: '100vh',
         display: 'flex',
+        flexDirection: "column",
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: "column",
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-<h1>Phonebook</h1>
-      < Form onSubmit={this.formSubmitHanler}
+        fontSize: 30,
+        color: '#fff',
+        backgroundColor: 'rgb(2,0,36)',
+        background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(191,4,171,0.6839985994397759) 35%, rgba(0,212,255,1) 100%)',
+        width: '500px',
+        height: 'auto',
+        padding: '30px',
+        margin: '0 auto',
+        borderRadius: '10px',
+        }}>
+      <TitleBook
+        title='Phonebook'
+
+      ></TitleBook>
+      < Form
+        onSubmit={this.addContact}
       />
-      <h2>Contacts</h2>
+      <Title
+          title="Contacts"
+      ></Title>
+      <Filter
+        values={this.state.filter}
+        onChange={this.handleChangeFilter}
+      />
+      <Contacts 
+            contactsList={visibleContacts}
+        />
+        
+        
     </div>
     );
   }
