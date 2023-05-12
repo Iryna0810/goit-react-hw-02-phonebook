@@ -6,6 +6,7 @@ import { TitleBook } from "./Form/Title_book";
 import { Contacts } from "./Contacts/Contacts";
 import { Filter } from "./Filtter/Filter";
 
+
 export class App extends Component {
   state = {
     contacts: [
@@ -38,47 +39,50 @@ export class App extends Component {
   };
   
   handleChangeFilter = (event) => {
-    this.setState({filter: event.currentTarget.value})
-  };
+    if (event.currentTarget.value.toLowerCase() === this.state.name) {
+      return alert("{this.state.name} is already in contacts")}
+      this.setState({ filter: event.currentTarget.value })
+    }
  
-  render() {
-  const visibleContacts = this.getVisibleContacts();
+    render() {
+      const visibleContacts = this.getVisibleContacts();
   
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: "column",
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 30,
-        color: '#fff',
-        backgroundColor: 'rgb(2,0,36)',
-        background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(191,4,171,0.6839985994397759) 35%, rgba(0,212,255,1) 100%)',
-        width: '500px',
-        height: 'auto',
-        padding: '30px',
-        margin: '0 auto',
-        borderRadius: '10px',
-        }}>
-      <TitleBook
-        title='Phonebook'
+      return (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: "column",
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: 30,
+            color: '#fff',
+            backgroundColor: 'rgb(2,0,36)',
+            background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(191,4,171,0.6839985994397759) 35%, rgba(0,212,255,1) 100%)',
+            width: '500px',
+            height: 'auto',
+            padding: '30px',
+            margin: '0 auto',
+            borderRadius: '10px',
+          }}>
+          <TitleBook
+            title='Phonebook'
 
-      ></TitleBook>
-      < Form
-        onSubmit={this.addContact}
-      />
-      <Title
-          title="Contacts"
-      ></Title>
-      <Filter
-        values={this.state.filter}
-        onChange={this.handleChangeFilter}
-      />
-      <Contacts 
+          ></TitleBook>
+          < Form
+            onSubmit={this.addContact}
+          />
+          <Title
+            title="Contacts"
+          ></Title>
+          <Filter
+            values={this.state.filter}
+            onChange={this.handleChangeFilter}
+          />
+          <Contacts
             contactsList={visibleContacts}
-        />        
-    </div>
-    );
+          />
+        </div>
+      );
+    }
   }
-};
+;
