@@ -1,8 +1,7 @@
 import { Component } from "react"
 import { nanoid } from 'nanoid'
 import { Form } from "./Form/Form";
-import { Title } from './Contacts/Title';
-import { TitleBook } from "./Form/Title_book";
+import { Title } from './Title/Title';
 import { Contacts } from "./Contacts/Contacts";
 import { Filter } from "./Filtter/Filter";
 
@@ -19,34 +18,55 @@ export class App extends Component {
   };
 
   addContact = ({ name, number }) => {
+    const { contacts } = this.state;
+          
     const ContactItem = {
       id: nanoid(),
       name,
       number,
     };
 
+    const normalizedName = name.toLowerCase();
+    const nameCheck = contacts.filter(contact => contact.name.toLowerCase().includes(normalizedName))
+    
+    if (nameCheck.length >= 1) {
+      return alert(`${name} is already in contacts`)
+    }
+
     this.setState(prevState => ({
-      contacts: [ContactItem, ...prevState.contacts],
-    })
-    )
-  };
+    contacts: [ContactItem, ...prevState.contacts]
+      }))  
+    };
+    
   
-  getVisibleContacts = () => {
-    return this.state.contacts
-      .filter(contact => contact.name.toLowerCase()
-        .includes(this.state.filter.toLowerCase())
-      )
+
+  deleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
   };
+
+
+  getVisibleContacts = () => {
+  const {contacts, filter} = this.state;
+  const normalizedFilter = filter.toLowerCase();
+    
+    return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter)) ;
+}
+  
+  
   
   handleChangeFilter = (event) => {
-    if (event.currentTarget.value.toLowerCase() === this.state.name) {
-      return alert("{this.state.name} is already in contacts")}
+    // if (event.currentTarget.value.toLowerCase() === this.state.name) {
+      // return alert("{this.state.name} is already in contacts")}
       this.setState({ filter: event.currentTarget.value })
-    }
+    
+  }
  
     render() {
+      
       const visibleContacts = this.getVisibleContacts();
-  
+    
       return (
         <div
           style={{
@@ -64,10 +84,10 @@ export class App extends Component {
             margin: '0 auto',
             borderRadius: '10px',
           }}>
-          <TitleBook
+          <Title
             title='Phonebook'
 
-          ></TitleBook>
+          ></Title>
           < Form
             onSubmit={this.addContact}
           />
@@ -80,6 +100,7 @@ export class App extends Component {
           />
           <Contacts
             contactsList={visibleContacts}
+            onDeleteContact={this.deleteContact}
           />
         </div>
       );

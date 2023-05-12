@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List } from 'components/styled';
+import { List, Button } from 'components/styled';
 
-export const Contacts = ({ contactsList }) =>
+export const Contacts = ({ contactsList, onDeleteContact }) =>
     <List>
-        {contactsList.map(contact => (<li
+        {contactsList.map(({id, name, number}) => (<li
         className=''
-        key={contact.id}>
-        <p>{contact.name}</p>
-        <p>{contact.number}</p>
+        key={id}>
+        <p>{name}</p>
+            <p>{number}</p>
+            <Button type="submit" onClick={()=>onDeleteContact(id)}>Delete</Button>
     </li>))}
     </List>
 
 
-Contacts.propTypes = { contactsList: PropTypes.array };
+Contacts.propTypes = {
+    contactsList: PropTypes.array,
+    onDeleteContact: PropTypes.func,
+};

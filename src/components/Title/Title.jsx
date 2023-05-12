@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Title = ({ title, children }) => (
+export const Title = ({ title }) => (
   <section>
-    <h3>{title}</h3>
-    {children}
+    <h2>{title}</h2>
   </section>
 );
 

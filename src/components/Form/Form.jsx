@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ActionsWrapper, Button, StyledInput } from "components/styled";
+import { FormWrapper, Button, StyledInput } from "components/styled";
 const { Component } = require("react");
 
 
@@ -26,14 +26,16 @@ export class Form extends Component {
     }
 
     reset = () => {
-        this.setState({name: '',
-    number: '',})
+      this.setState({
+        name: '',
+        number: '',
+      })
     }
 
     render() {
-      return <ActionsWrapper action="" onSubmit={this.handleSubmit}>
+      return <FormWrapper action="" onSubmit={this.handleSubmit}>
         <label htmlFor="">Name
-          <StyledInput
+        <StyledInput
         type="text"
         name="name"
         value={this.state.name}
@@ -56,7 +58,7 @@ export class Form extends Component {
           </label>
          
           <Button type="submit">Add contacts</Button>
-        </ActionsWrapper>
+        </FormWrapper>
        
     }
 

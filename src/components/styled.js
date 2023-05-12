@@ -9,9 +9,9 @@ export const List = styled.ul`
   padding: 0;
   margin-top: 20px;
 `;
-export const ActionsWrapper = styled.form`
+export const FormWrapper = styled.form`
   margin: 0 auto;
-  padding: 0;
+  padding: 10px;
   gap: 20px;
   width: 100%;
 
