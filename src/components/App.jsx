@@ -27,7 +27,7 @@ export class App extends Component {
     };
 
     const normalizedName = name.toLowerCase();
-    const nameCheck = contacts.filter(contact => contact.name.toLowerCase().includes(normalizedName))
+    const nameCheck = contacts.filter(contact => contact.name.toLowerCase() === normalizedName)
     
     if (nameCheck.length >= 1) {
       return alert(`${name} is already in contacts`)
